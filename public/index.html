@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/lightpick@latest/css/lightpick.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" 
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+
+  </style>
+  <title>Finance App</title>
+</head>
+<body>
+  <div class="container">
+    <div class="four columns" id="form-container">
+      
+      <div class="date-picker-container">
+        <h5>Select date range:</h5>        
+        <div class="row">
+            <input class="six columns" type="text" id="start">
+            <input class="six columns" type="text" id="end">
+          </div>
+      </div>
+
+      <h5>New Expense:</h5>
+      <form id="expense-form">
+        <div class="row">
+          <div class="">
+            <label for="description">Description</label>
+            <textarea id="description" rows="4" cols="50" class="u-full-width"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="six columns">
+            <label for="value">Value</label>
+            <input type="text" id="value" class="u-full-width">
+          </div>
+          <div class="six columns">
+              <label for="date">Date</label>
+              <input type="text" id="date" class="u-full-width">
+          </div>
+        </div>
+        <div class="row">
+          <div class="six columns">
+              <label for="category">New category?</label>
+              <input type="text" id="category" class="u-full-width">
+          </div>
+          <div class="six columns">
+              <label for="category-list">Category list</label>
+              <select id="category-list" class="u-full-width">
+                <option>Select from list</option>
+              </select>
+          </div>
+        </div>
+        <div class="row" style="display: none;">
+          <label for="unique-id">Unique ID</label>
+          <input type="hidden" id="unique-id" class="">
+        </div>
+        <div class="row">
+          <div class="">
+            <input type="submit" value="Submit" id="submit" class="u-full-width">
+            <input type="submit" value="Edit" id="edit" class="u-full-width">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="eight columns">
+      <!-- <h2>Statistics:</h2> -->
+
+      <div class="">
+        <div id="chart"></div>
+        <!-- <button id="change">Horizontal</button> -->
+      </div>
+
+    
+      <!-- <div class="row"> -->
+        <!-- <ul id="categories-expenses"></ul> -->
+      <!-- </div> -->
+    </div>
+
+    <table class="u-full-width">
+      <thead>
+        <tr id="sort-list">
+          <th order="desc" id="description">Description</th>
+          <th order="desc" id="value">Value</th>
+          <th order="desc" id="category">Category</th>
+          <th order="desc" id="dateTime">Date</th>
+          <!-- <th>Unique Id</th> -->
+        </tr>
+      </thead>
+      <tbody id="expense-list">
+      </tbody>
+    </table>
+
+    <div class="twelve columns">
+      <h5 class="u-pull-right">Total: <span id="total"></span></h5>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/2.2.4/apexcharts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+  <script src="./js/datePicker/lightpick.js"></script>
+
+  <script src="./js/app.js"></script>
+</body>
+</html>

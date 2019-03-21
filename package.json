@@ -1,0 +1,15 @@
+{
+  "name": "finance_app",
+  "version": "1.0.0",
+  "description": "finance app in node",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "author": "Ghergic Raul-Dorian",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}

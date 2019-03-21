@@ -1,0 +1,45 @@
+.success, .error {
+    color: white;
+    padding: 5px;
+    margin: 5px 0 15px 0;
+  }
+
+  .success {
+    background: green;
+  }
+
+  .error {
+    background: red;
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .container {
+    margin: 70px auto;
+    overflow: hidden;
+    width: 80%;
+    text-align: center;
+  }
+
+  .date-picker-container {
+        padding-bottom: 30px;
+  }
+
+  label {
+    float: left;
+  }
+
+  th {
+    cursor: pointer;
+  }
+  a {
+    text-decoration: none;
+  }
+
+  input#edit {
+    display:none;     
+    background-color: darkcyan;
+    color: white;
+  }
