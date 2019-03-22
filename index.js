@@ -40,12 +40,13 @@ const server = http.createServer((req, res) => {
 
     fs.readFile(filePath, (err, content) => {
         if (err) {
+            console.log(filePath);
             if (err.code == 'ENOENT') {
                 // Page not found
-                // fs.readFile(path.join(__dirname, 'public', '404.html'), (err, content) => {
-                //     res.writeHead(200, { 'Content-Type': 'text/html' });
-                //     res.end(content, 'utf8');
-                // });
+                fs.readFile(path.join(__dirname, 'public', '404.html'), (err, content) => {
+                    res.writeHead(200, { 'Content-Type': 'text/html' });
+                    res.end(content, 'utf8');
+                });
                 console.log('page not found..');
             } else {
                 // Some server error
@@ -60,7 +61,6 @@ const server = http.createServer((req, res) => {
     });
 
 });
-
 
 const PORT = process.env.PORT || 5001;
 
