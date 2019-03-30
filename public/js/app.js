@@ -12,32 +12,43 @@ const StorageCtrl = (function(){
       // console.log(Array.isArray(storageExp));
       // console.log(storageExp.length);
 
+    // If local storage is empty set dummy expenses
     if (!Array.isArray(storageExp) || !storageExp.length) {
-      // If local storage is empty set dummy expenses
       // expenses = [];
       expenses = [{"description":"groceries","value":"270","category":"Food","dateTime":"3/21/2019","uniqueId":1553250787866},
-                  {"description":"energy bill","value":"65","category":"Living","dateTime":"3/16/2019","uniqueId":1553250844445},
+                  {"description":"energy bill","value":"65","category":"Utilities","dateTime":"3/16/2019","uniqueId":1553250844445},
                   {"description":"vacation","value":"800","category":"Personal","dateTime":"3/22/2019","uniqueId":1553250914767},
                   {"description":"new sneakers","value":"320","category":"Clothes","dateTime":"3/22/2019","uniqueId":1553250948517}];
       localStorage.setItem('expenses', JSON.stringify(expenses));
+
+      return expenses;
     } else {
-      expenses = JSON.parse(localStorage.getItem('expenses'));
+      return storageExp;
     }
-
-    console.log('in storage: ' + expenses.length);
-
-    return expenses;
   }
 
   getCategories = function(){
-    let categories;
-    if(localStorage.getItem('categories') === null) {
-      categories = [];
+    // let categories;
+    // if(localStorage.getItem('categories') === null) {
+    //   categories = [];
+    // } else {
+    //   categories = JSON.parse(localStorage.getItem('categories'));
+    // }
+
+    // return categories;
+
+    const storageCat = JSON.parse(localStorage.getItem('categories'));
+
+    // If local storage is empty set dummy categories
+    if (!Array.isArray(storageCat) || !storageCat.length) {
+      categories = ["Food", "Personal", "Living", "Utilities", "Transport", "Tech", "Sport", "Clothes", "Health"];
+      localStorage.setItem('categories', JSON.stringify(categories));
+
+      return categories;
     } else {
-      categories = JSON.parse(localStorage.getItem('categories'));
+      return storageCat;
     }
 
-    return categories;
   }
 
   addExpense = function(expense) {
@@ -480,7 +491,7 @@ const UICtrl = (function(){
     showList() {
       // console.log(UISelectors.list);
       // document.querySelector(UISelectors.expenseList).style.display = 'block';
-      document.querySelector('#expense-table').style.display = 'block';
+      document.querySelector('#expense-table').style.display = 'inline-table';
     },
 
     showEditState() {
@@ -1024,7 +1035,7 @@ const ChartSingleton = (function(){
     //     }
     //   }
     // };
-
+    
    options = {
       chart: {
           width: '100%',
@@ -1080,9 +1091,10 @@ const ChartSingleton = (function(){
       return instance;
     },
     updateChart: function(expenses) {
-      console.log(expenses);
       
       if (Array.isArray(expenses) && expenses.length) {
+        console.log(expenses);
+
         setOptions(expenses);
         this.getInstance().updateOptions(getOptions());  
       }
