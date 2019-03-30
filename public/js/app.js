@@ -1115,6 +1115,41 @@ const App = (function(ExpenseCtrl, UICtrl, StorageCtrl, HelperCtrl, ChartSinglet
     document.querySelector(UICtrl.getUISelectors().expenseList).addEventListener('click', editExpense);
     document.querySelector(UICtrl.getUISelectors().submit).addEventListener('click', addExpense);
     document.querySelector(UICtrl.getUISelectors().edit).addEventListener('click', editExpenseSubmit);
+    document.querySelector(UICtrl.getUISelectors().edit).addEventListener('click', editExpenseSubmit);    
+    document.getElementsByTagName('body')[0].addEventListener('click', showAllExpenses);    
+  }
+
+  const showAllExpenses = function(e) {
+    if(e.target.nodeName != 'path') {
+      const dates = HelperCtrl.getFirstLastMonthDate();
+      const firstDay = dates.firstDay;
+      const lastDay = dates.lastDay;
+
+      const startDateInput = document.querySelector(UICtrl.getUISelectors().startDateInput);
+      const endDateInput = document.querySelector(UICtrl.getUISelectors().endDateInput);
+
+      startDateInput.value = firstDay;
+      endDateInput.value = lastDay;
+
+      const expenses = ExpenseCtrl.getExpensesByDate(firstDay, lastDay);
+
+      if (expenses.length === 0) {
+        UICtrl.hideList();
+      }
+      else {
+        // display current month expenses
+        UICtrl.displayExpenses(expenses);
+        
+        // display current month chart
+        UICtrl.displayChart(expenses);
+      }
+    
+      // display current month total
+      const totalExpenses = ExpenseCtrl.getTotal();
+      UICtrl.displayTotal(totalExpenses);
+    }
+
+    e.preventDefault();
   }
 
   const addExpense = function(e){
