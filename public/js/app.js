@@ -15,10 +15,10 @@ const StorageCtrl = (function(){
     // If local storage is empty set dummy expenses
     if (!Array.isArray(storageExp) || !storageExp.length) {
       // expenses = [];
-      expenses = [{"description":"groceries","value":"270","category":"Food","dateTime":"3/21/2019","uniqueId":1553250787866},
-                  {"description":"energy bill","value":"65","category":"Utilities","dateTime":"3/16/2019","uniqueId":1553250844445},
-                  {"description":"vacation","value":"800","category":"Personal","dateTime":"3/22/2019","uniqueId":1553250914767},
-                  {"description":"new sneakers","value":"320","category":"Clothes","dateTime":"3/22/2019","uniqueId":1553250948517}];
+      expenses = [{"description":"groceries","value":"270","category":"Food","dateTime":"3/1/2019","uniqueId":1553250787866},
+                  {"description":"energy bill","value":"65","category":"Utilities","dateTime":"3/1/2019","uniqueId":1553250844445},
+                  {"description":"vacation","value":"800","category":"Personal","dateTime":"3/1/2019","uniqueId":1553250914767},
+                  {"description":"new sneakers","value":"320","category":"Clothes","dateTime":"3/1/2019","uniqueId":1553250948517}];
       localStorage.setItem('expenses', JSON.stringify(expenses));
 
       return expenses;
@@ -200,7 +200,7 @@ const ExpenseCtrl = (function(StorageCtrl){
       }
     },  
     getExpensesByDate: function(startDate, endDate) {
-      console.log(startDate, endDate);
+      // console.log(startDate, endDate);
 
       const filtered = this.getExpenses(true).filter(function(expense){
         const expenseDate = expense.dateTime;
@@ -212,7 +212,7 @@ const ExpenseCtrl = (function(StorageCtrl){
       });
 
       this.setExpenses(filtered);
-      console.log('in getExpensesByDate:' + data.expenses.length);
+      // console.log('in getExpensesByDate:' + data.expenses.length);
 
       return filtered;
     },
@@ -230,7 +230,7 @@ const ExpenseCtrl = (function(StorageCtrl){
 
       var expenses = (expenses == null) ? this.getExpenses(false) : expenses;
 
-      console.log('in getTotal: ' + data.expenses.length);
+      // console.log('in getTotal: ' + data.expenses.length);
       expenses.forEach(function(expense){
         total += parseFloat(expense.value);
       });
@@ -414,7 +414,7 @@ const UICtrl = (function(){
           // }
 
           const expenses = ExpenseCtrl.getExpensesByDate(startDate, endDate);
-          console.log('onClose: ' + expenses.length);
+          // console.log('onClose: ' + expenses.length);
           // const expenses = ExpenseCtrl.getExpenses();
     
           if (expenses.length === 0) {
@@ -1051,7 +1051,7 @@ const ChartSingleton = (function(){
               const totalExpenses = ExpenseCtrl.getTotal(filtered);
               UICtrl.displayTotal(totalExpenses);
 
-              console.log(config);
+              // console.log(config);
             },
           },
       },
@@ -1093,7 +1093,7 @@ const ChartSingleton = (function(){
     updateChart: function(expenses) {
       
       if (Array.isArray(expenses) && expenses.length) {
-        console.log(expenses);
+        // console.log(expenses);
 
         setOptions(expenses);
         this.getInstance().updateOptions(getOptions());  
@@ -1246,7 +1246,7 @@ const App = (function(ExpenseCtrl, UICtrl, StorageCtrl, HelperCtrl, ChartSinglet
 
     // const expenses = Storage.getExpenses();
     const expenses = ExpenseCtrl.getExpenses();
-    console.log(expenses);
+    // console.log(expenses);
     
     expenses.sort(HelperCtrl.compareValues(th.id, order));
   
@@ -1340,7 +1340,7 @@ const App = (function(ExpenseCtrl, UICtrl, StorageCtrl, HelperCtrl, ChartSinglet
       // HelperCtrl.populateExpenses();
 
       const expenses = ExpenseCtrl.getExpensesByDate(firstDay, lastDay);
-      console.log('init: ' + expenses.length);
+      // console.log('init: ' + expenses.length);
       // const expenses = ExpenseCtrl.getExpenses();
 
       if (expenses.length === 0) {
