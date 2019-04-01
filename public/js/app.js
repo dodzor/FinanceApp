@@ -15,10 +15,10 @@ const StorageCtrl = (function(){
     // If local storage is empty set dummy expenses
     if (!Array.isArray(storageExp) || !storageExp.length) {
       // expenses = [];
-      expenses = [{"description":"groceries","value":"270","category":"Food","dateTime":"3/1/2019","uniqueId":1553250787866},
-                  {"description":"energy bill","value":"65","category":"Utilities","dateTime":"3/1/2019","uniqueId":1553250844445},
-                  {"description":"vacation","value":"800","category":"Personal","dateTime":"3/1/2019","uniqueId":1553250914767},
-                  {"description":"new sneakers","value":"320","category":"Clothes","dateTime":"3/1/2019","uniqueId":1553250948517}];
+      expenses = [{"description":"groceries","value":"270","category":"Food","dateTime":"4/1/2019","uniqueId":1553250787866},
+                  {"description":"energy bill","value":"65","category":"Utilities","dateTime":"4/1/2019","uniqueId":1553250844445},
+                  {"description":"vacation","value":"800","category":"Personal","dateTime":"4/1/2019","uniqueId":1553250914767},
+                  {"description":"new sneakers","value":"320","category":"Clothes","dateTime":"4/1/2019","uniqueId":1553250948517}];
       localStorage.setItem('expenses', JSON.stringify(expenses));
 
       return expenses;
