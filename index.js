@@ -12,7 +12,7 @@ const server = http.createServer((req, res) => {
 //     }
 
     const clientIp = req.connection.remoteAddress;
-    console.log(clientIp);
+    // console.log(clientIp);
 
     let filePath = path.join(
         __dirname,
@@ -43,7 +43,7 @@ const server = http.createServer((req, res) => {
 
     fs.readFile(filePath, (err, content) => {
         if (err) {
-            console.log(filePath);
+            // console.log(filePath);
             if (err.code == 'ENOENT') {
                 // Page not found
                 fs.readFile(path.join(__dirname, 'public', '404.html'), (err, content) => {
@@ -57,6 +57,34 @@ const server = http.createServer((req, res) => {
                 res.end(`Server Error: ${err.code}`);
             }
         } else {
+            // Test for new IP
+            // fs.readFile('ips.json', (err, content) => {
+            //     // console.log(err);
+            //     // console.log(JSON.parse(content));
+            //     let ips = JSON.parse(content);
+
+            //     ips.forEach(function(ip){
+            //         if (clientIp === ip) {
+            //            console.log('ip found');
+            //         }
+            //         else {
+            //             ips.push(clientIp);
+            //             // console.log(ips);
+            //             fs.writeFile('ips.json', JSON.stringify(ips), 'utf-8', (err, contentW) => {
+            //                 if (err) {
+            //                     res.writeHead(500);
+            //                     res.end(`Server Eroor: ${err.code}`);
+            //                 } else {
+            //                     res.writeHead(200, { 'Content-Type': 'application/json'});
+            //                     res.end(contentW, 'utf-8');
+            //                 }
+                        
+            //             });
+            //         }
+            //     })
+            // });
+
+
             // Success
             res.writeHead(200, { 'Content-Type': contentType });
             res.end(content, 'utf8');
