@@ -11,6 +11,9 @@ const server = http.createServer((req, res) => {
 //         }); 
 //     }
 
+    const clientIp = req.connection.remoteAddress;
+    console.log(clientIp);
+
     let filePath = path.join(
         __dirname,
         'public',
