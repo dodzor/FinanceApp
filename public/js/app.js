@@ -8,7 +8,7 @@ const StorageCtrl = (function(){
     //   expenses = JSON.parse(localStorage.getItem('expenses'));
     // }
     const storageExp = JSON.parse(localStorage.getItem('expenses'));
-      // console.log(storageExp);
+    // console.log(storageExp);
       // console.log(Array.isArray(storageExp));
       // console.log(storageExp.length);
 
@@ -400,21 +400,10 @@ const UICtrl = (function(){
           const startDate = document.querySelector(UISelectors.startDateInput).value;
           const endDate = document.querySelector(UISelectors.endDateInput).value;
 
-          // const expenses = StorageCtrl.getExpenses();
-          // const filtered = ExpenseCtrl.filterExpensesByDate(expenses, startDate, endDate);
-
-          // if (filtered.length > 0) {
-          //   // UICtrl.displayExpenseByDate(expenses, startDate, endDate);
-          //   UICtrl.displayExpenses(filtered);
-          //   // UICtrl.displayTotalByDate(expenses, startDate, endDate);
-          //   const totalExpenses = ExpenseCtrl.getTotal();
-          //   UICtrl.displayTotal(totalExpenses);
-
-          //   ChartSingleton.updateChart(filtered);
-          // }
+          // console.log(startDate, endDate);
 
           const expenses = ExpenseCtrl.getExpensesByDate(startDate, endDate);
-          // console.log('onClose: ' + expenses.length);
+          console.log('onClose: ' + expenses.length);
           // const expenses = ExpenseCtrl.getExpenses();
     
           if (expenses.length === 0) {
@@ -574,6 +563,10 @@ const HelperCtrl = (function(){
       var date = new Date();
       var firstDay = new Date(date.getFullYear(), date.getMonth(), 1).toLocaleString();
       var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).toLocaleString();
+
+      // Split hours from string
+      firstDay = firstDay.split(',')[0];
+      lastDay = lastDay.split(',')[0];
 
       return {'firstDay': firstDay, 'lastDay': lastDay};
     },
@@ -1120,18 +1113,12 @@ const App = (function(ExpenseCtrl, UICtrl, StorageCtrl, HelperCtrl, ChartSinglet
   }
 
   const showAllExpenses = function(e) {
+    // console.log(e.target.nodeName);
     if(e.target.nodeName != 'path') {
-      const dates = HelperCtrl.getFirstLastMonthDate();
-      const firstDay = dates.firstDay;
-      const lastDay = dates.lastDay;
+      const startDateInputValue = document.querySelector(UICtrl.getUISelectors().startDateInput).value;
+      const endDateInputValue = document.querySelector(UICtrl.getUISelectors().endDateInput).value;
 
-      const startDateInput = document.querySelector(UICtrl.getUISelectors().startDateInput);
-      const endDateInput = document.querySelector(UICtrl.getUISelectors().endDateInput);
-
-      startDateInput.value = firstDay;
-      endDateInput.value = lastDay;
-
-      const expenses = ExpenseCtrl.getExpensesByDate(firstDay, lastDay);
+      const expenses = ExpenseCtrl.getExpensesByDate(startDateInputValue, endDateInputValue);
 
       if (expenses.length === 0) {
         UICtrl.hideList();
@@ -1334,6 +1321,8 @@ const App = (function(ExpenseCtrl, UICtrl, StorageCtrl, HelperCtrl, ChartSinglet
       const startDateInput = document.querySelector(UICtrl.getUISelectors().startDateInput);
       const endDateInput = document.querySelector(UICtrl.getUISelectors().endDateInput);
 
+      // console.log(firstDay);
+      // console.log(lastDay)
       startDateInput.value = firstDay;
       endDateInput.value = lastDay;
 
