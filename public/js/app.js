@@ -14,17 +14,35 @@ const StorageCtrl = (function(){
 
     // If local storage is empty set dummy expenses
     if (!Array.isArray(storageExp) || !storageExp.length) {
-      // expenses = [];
-      expenses = [{"description":"groceries","value":"270","category":"Food","dateTime":"4/1/2019","uniqueId":1553250787866},
-                  {"description":"energy bill","value":"65","category":"Utilities","dateTime":"4/1/2019","uniqueId":1553250844445},
-                  {"description":"vacation","value":"800","category":"Personal","dateTime":"4/1/2019","uniqueId":1553250914767},
-                  {"description":"new sneakers","value":"320","category":"Clothes","dateTime":"4/1/2019","uniqueId":1553250948517}];
-      localStorage.setItem('expenses', JSON.stringify(expenses));
+      expenses = [];
+      // expenses = [{"description":"groceries","value":"270","category":"Food","dateTime":"4/1/2019","uniqueId":1553250787866},
+      //             {"description":"energy bill","value":"65","category":"Utilities","dateTime":"4/1/2019","uniqueId":1553250844445},
+      //             {"description":"vacation","value":"800","category":"Personal","dateTime":"4/1/2019","uniqueId":1553250914767},
+      //             {"description":"new sneakers","value":"320","category":"Clothes","dateTime":"4/1/2019","uniqueId":1553250948517}];
+
+      readTextFile('../db/expenses.json', function(text){
+        console.log(text);
+        expenses = JSON.parse(text);
+      
+        localStorage.setItem('expenses', JSON.stringify(expenses)); 
+      });
 
       return expenses;
     } else {
       return storageExp;
     }
+  }
+
+  readTextFile = function(file, callback){
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+            callback(rawFile.responseText);
+        }
+    }
+    rawFile.send(null);
   }
 
   getCategories = function(){
